@@ -42,16 +42,43 @@ function EditFood() {
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label htmlFor="food-price" className="font-medium text-gray-700">
+                قیمت (تومان)
+              </label>
+              <input
+                type="text"
+                id="food-price"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue="۲۸۵,۰۰۰"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="food-stock" className="font-medium text-gray-700">
+                تعداد موجودی
+              </label>
+              <input
+                type="number"
+                id="food-stock"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue="۱۰"
+              />
+            </div>
+          </div>
+
           <div className="space-y-2">
-            <label htmlFor="food-price" className="font-medium text-gray-700">
-              قیمت (تومان)
-            </label>
-            <input
-              type="text"
-              id="food-price"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              defaultValue="۲۸۵,۰۰۰"
-            />
+            <label className="font-medium text-gray-700">وضعیت موجودی</label>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input type="radio" name="stock-status" value="available" className="form-radio text-blue-600" defaultChecked />
+                <span className="text-gray-700">موجود</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="radio" name="stock-status" value="unavailable" className="form-radio text-blue-600" />
+                <span className="text-gray-700">ناموجود</span>
+              </label>
+            </div>
           </div>
 
           <div className="space-y-2">

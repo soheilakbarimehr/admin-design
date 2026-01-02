@@ -22,6 +22,7 @@ function Layout({ children, currentPage, onNavigate }: LayoutProps) {
       submenu: [
         { id: 'foods-list', label: 'لیست غذاها' },
         { id: 'foods-add', label: 'افزودن غذا' },
+        { id: 'foods-edit', label: 'ویرایش غذا' },
       ],
     },
     { id: 'categories', label: 'مدیریت دسته‌بندی', icon: FolderTree },
