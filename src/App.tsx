@@ -3,6 +3,8 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Foods from './pages/Foods';
 import Categories from './pages/Categories';
+import AddFood from './pages/AddFood';
+import EditFood from './pages/EditFood';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
@@ -11,8 +13,12 @@ function App() {
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard />;
-      case 'foods':
-        return <Foods />;
+      case 'foods-list':
+        return <Foods onNavigate={setCurrentPage} />;
+      case 'foods-add':
+        return <AddFood />;
+      case 'foods-edit':
+        return <EditFood />;
       case 'categories':
         return <Categories />;
       default:

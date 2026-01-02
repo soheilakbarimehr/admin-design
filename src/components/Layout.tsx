@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { Menu, X, Home, UtensilsCrossed, FolderTree } from 'lucide-react';
+import { Menu, X, Home, UtensilsCrossed, FolderTree, ChevronDown } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,10 +9,21 @@ interface LayoutProps {
 
 function Layout({ children, currentPage, onNavigate }: LayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState<string | null>(
+    currentPage.startsWith('foods') ? 'foods' : null
+  );
 
   const menuItems = [
     { id: 'dashboard', label: 'داشبورد', icon: Home },
-    { id: 'foods', label: 'مدیریت غذاها', icon: UtensilsCrossed },
+    {
+      id: 'foods',
+      label: 'مدیریت غذاها',
+      icon: UtensilsCrossed,
+      submenu: [
+        { id: 'foods-list', label: 'لیست غذاها' },
+        { id: 'foods-add', label: 'افزودن غذا' },
+      ],
+    },
     { id: 'categories', label: 'مدیریت دسته‌بندی', icon: FolderTree },
   ];
 
@@ -36,6 +47,52 @@ function Layout({ children, currentPage, onNavigate }: LayoutProps) {
         <nav className="p-4">
           {menuItems.map((item) => {
             const Icon = item.icon;
+            const isSubMenuOpen = openSubMenu === item.id;
+
+            if (item.submenu) {
+              return (
+                <div key={item.id} className="mb-2">
+                  <button
+                    onClick={() =>
+                      setOpenSubMenu(isSubMenuOpen ? null : item.id)
+                    }
+                    className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon size={20} />
+                      <span className="font-medium">{item.label}</span>
+                    </div>
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform ${
+                        isSubMenuOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isSubMenuOpen && (
+                    <div className="pt-2 pr-4">
+                      {item.submenu.map((subItem) => (
+                        <button
+                          key={subItem.id}
+                          onClick={() => {
+                            onNavigate(subItem.id);
+                            setIsSidebarOpen(false);
+                          }}
+                          className={`w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm ${
+                            currentPage === subItem.id
+                              ? 'bg-blue-500 text-white'
+                              : 'text-gray-600 hover:bg-gray-100'
+                          }`}
+                        >
+                          {subItem.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
             return (
               <button
                 key={item.id}

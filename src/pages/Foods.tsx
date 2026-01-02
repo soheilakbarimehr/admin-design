@@ -1,8 +1,37 @@
 import { useState } from 'react';
 import { Plus, Search, Edit2, Trash2, Eye, EyeOff } from 'lucide-react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
-function Foods() {
+const MySwal = withReactContent(Swal);
+
+interface FoodsProps {
+  onNavigate: (page: string) => void;
+}
+
+function Foods({ onNavigate }: FoodsProps) {
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleDelete = () => {
+    MySwal.fire({
+      title: 'آیا از حذف این غذا اطمینان دارید؟',
+      text: "این عمل غیرقابل بازگشت است!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'بله، حذف کن!',
+      cancelButtonText: 'انصراف'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        MySwal.fire(
+          'حذف شد!',
+          'غذای مورد نظر با موفقیت حذف شد.',
+          'success'
+        )
+      }
+    })
+  };
 
   const foods = [
     {
@@ -66,7 +95,10 @@ function Foods() {
       <div className="bg-white rounded-xl shadow-sm p-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <h2 className="text-xl font-bold text-gray-800">لیست غذاها</h2>
-          <button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all flex items-center gap-2 justify-center shadow-sm">
+          <button
+            onClick={() => onNavigate('foods-add')}
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all flex items-center gap-2 justify-center shadow-sm"
+          >
             <Plus size={20} />
             افزودن غذای جدید
           </button>
@@ -134,10 +166,16 @@ function Foods() {
                   </td>
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
-                      <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                      <button
+                        onClick={() => onNavigate('foods-edit')}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      >
                         <Edit2 size={18} />
                       </button>
-                      <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                      <button
+                        onClick={handleDelete}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      >
                         <Trash2 size={18} />
                       </button>
                     </div>
@@ -185,10 +223,16 @@ function Foods() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors">
+                  <button
+                    onClick={() => onNavigate('foods-edit')}
+                    className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                  >
                     <Edit2 size={18} />
                   </button>
-                  <button className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors">
+                  <button
+                    onClick={handleDelete}
+                    className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                  >
                     <Trash2 size={18} />
                   </button>
                 </div>
