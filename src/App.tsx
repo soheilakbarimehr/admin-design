@@ -5,6 +5,8 @@ import Foods from './pages/Foods';
 import Categories from './pages/Categories';
 import AddFood from './pages/AddFood';
 import EditFood from './pages/EditFood';
+import AddCategory from './pages/AddCategory';
+import EditCategory from './pages/EditCategory';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
@@ -19,8 +21,12 @@ function App() {
         return <AddFood />;
       case 'foods-edit':
         return <EditFood />;
-      case 'categories':
-        return <Categories />;
+      case 'categories-list':
+        return <Categories onNavigate={setCurrentPage} />;
+      case 'categories-add':
+        return <AddCategory />;
+      case 'categories-edit':
+        return <EditCategory />;
       default:
         return <Dashboard />;
     }

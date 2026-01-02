@@ -25,7 +25,16 @@ function Layout({ children, currentPage, onNavigate }: LayoutProps) {
         { id: 'foods-edit', label: 'ویرایش غذا' },
       ],
     },
-    { id: 'categories', label: 'مدیریت دسته‌بندی', icon: FolderTree },
+    {
+      id: 'categories',
+      label: 'مدیریت دسته‌بندی',
+      icon: FolderTree,
+      submenu: [
+        { id: 'categories-list', label: 'لیست دسته‌بندی‌ها' },
+        { id: 'categories-add', label: 'افزودن دسته‌بندی' },
+        { id: 'categories-edit', label: 'ویرایش دسته‌بندی' },
+      ],
+    },
   ];
 
   return (
