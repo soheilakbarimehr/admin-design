@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>داشبورد - پنل مدیریت رستوران</title>
+  <title>افزودن دسته‌بندی - پنل مدیریت رستوران</title>
   <link rel="stylesheet" href="./output.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,12 +20,10 @@
         </button>
       </div>
       <nav class="p-4">
-        <!-- Dashboard Link -->
-        <a href="./index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors mb-2 bg-blue-500 text-white">
+        <a href="./index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors mb-2 text-gray-700 hover:bg-gray-100">
           <i data-lucide="home" class="w-5 h-5"></i>
           <span class="font-medium">داشبورد</span>
         </a>
-        <!-- Food Management Submenu -->
         <div class="mb-2">
           <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
             <div class="flex items-center gap-3">
@@ -40,7 +38,6 @@
             <a href="./foods-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">ویرایش غذا</a>
           </div>
         </div>
-        <!-- Category Management Submenu -->
         <div class="mb-2">
           <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
             <div class="flex items-center gap-3">
@@ -51,7 +48,7 @@
           </button>
           <div class="submenu-content pt-2 pr-4 hidden">
             <a href="./categories-list.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">لیست دسته‌بندی‌ها</a>
-            <a href="./categories-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">افزودن دسته‌بندی</a>
+            <a href="./categories-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm bg-blue-500 text-white">افزودن دسته‌بندی</a>
             <a href="./categories-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">ویرایش دسته‌بندی</a>
           </div>
         </div>
@@ -65,55 +62,42 @@
           <button id="open-sidebar-btn" class="lg:hidden text-gray-600 hover:text-gray-900">
             <i data-lucide="menu"></i>
           </button>
-          <h2 class="text-lg font-semibold text-gray-800">داشبورد</h2>
+          <h2 class="text-lg font-semibold text-gray-800">افزودن دسته‌بندی جدید</h2>
           <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
             AD
           </div>
         </div>
       </header>
       <main class="p-4 lg:p-8">
-        <!-- Dashboard Content -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <!-- Card 1 -->
-          <div class="bg-white rounded-xl shadow-sm p-6 flex items-center gap-6">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg">
-              <i data-lucide="utensils-crossed" class="w-8 h-8"></i>
+        <!-- Add Category Form -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-6">فرم افزودن دسته‌بندی</h2>
+          <form class="space-y-6">
+            <!-- Form fields from AddCategory.tsx -->
+            <div class="space-y-2">
+              <label for="category-name" class="font-medium text-gray-700">نام دسته‌بندی</label>
+              <input type="text" id="category-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="مثال: نوشیدنی">
             </div>
-            <div>
-              <p class="text-gray-500 text-sm font-medium">تعداد کل غذاها</p>
-              <p class="text-2xl font-bold text-gray-800">۷۴</p>
+            <div class="space-y-2">
+              <label for="category-description" class="font-medium text-gray-700">توضیحات</label>
+              <textarea id="category-description" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="توضیح مختصری در مورد دسته‌بندی"></textarea>
             </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="bg-white rounded-xl shadow-sm p-6 flex items-center gap-6">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white shadow-lg">
-              <i data-lucide="receipt" class="w-8 h-8"></i>
+            <div class="space-y-2">
+              <label for="category-color" class="font-medium text-gray-700">کلاس رنگ Tailwind</label>
+              <input type="text" id="category-color" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="مثال: from-blue-500 to-indigo-500">
             </div>
-            <div>
-              <p class="text-gray-500 text-sm font-medium">سفارشات امروز</p>
-              <p class="text-2xl font-bold text-gray-800">۱۲۸</p>
+            <div class="space-y-2">
+              <label class="font-medium text-gray-700">وضعیت</label>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-2"><input type="radio" name="status" value="active" class="form-radio text-blue-600" checked><span class="text-gray-700">فعال</span></label>
+                <label class="flex items-center gap-2"><input type="radio" name="status" value="inactive" class="form-radio text-blue-600"><span class="text-gray-700">غیرفعال</span></label>
+              </div>
             </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="bg-white rounded-xl shadow-sm p-6 flex items-center gap-6">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-white shadow-lg">
-              <i data-lucide="users" class="w-8 h-8"></i>
+            <div class="flex justify-end gap-4 pt-4">
+              <button type="button" class="px-6 py-2.5 rounded-lg font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all">لغو</button>
+              <button type="submit" class="px-6 py-2.5 rounded-lg font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all">افزودن دسته‌بندی</button>
             </div>
-            <div>
-              <p class="text-gray-500 text-sm font-medium">مشتریان جدید</p>
-              <p class="text-2xl font-bold text-gray-800">۳۲</p>
-            </div>
-          </div>
-          <!-- Card 4 -->
-          <div class="bg-white rounded-xl shadow-sm p-6 flex items-center gap-6">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white shadow-lg">
-              <i data-lucide="trending-up" class="w-8 h-8"></i>
-            </div>
-            <div>
-              <p class="text-gray-500 text-sm font-medium">درآمد امروز (تومان)</p>
-              <p class="text-2xl font-bold text-gray-800">۵,۴۰۰,۰۰۰</p>
-            </div>
-          </div>
+          </form>
         </div>
       </main>
     </div>

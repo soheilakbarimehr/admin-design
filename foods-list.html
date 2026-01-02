@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لیست غذاها - پنل مدیریت رستوران</title>
+  <link rel="stylesheet" href="./output.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50">
+
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 lg:translate-x-0 translate-x-full">
+      <div class="flex items-center justify-between p-6 border-b">
+        <h1 class="text-xl font-bold text-gray-800">پنل مدیریت رستوران</h1>
+        <button id="close-sidebar-btn" class="lg:hidden text-gray-600 hover:text-gray-900">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <nav class="p-4">
+        <a href="./index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors mb-2 text-gray-700 hover:bg-gray-100">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="font-medium">داشبورد</span>
+        </a>
+        <div class="mb-2">
+          <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
+              <span class="font-medium">مدیریت غذاها</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+          </button>
+          <div class="submenu-content pt-2 pr-4 hidden">
+            <a href="./foods-list.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm bg-blue-500 text-white">لیست غذاها</a>
+            <a href="./foods-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">افزودن غذا</a>
+            <a href="./foods-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">ویرایش غذا</a>
+          </div>
+        </div>
+        <div class="mb-2">
+          <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="folder-tree" class="w-5 h-5"></i>
+              <span class="font-medium">مدیریت دسته‌بندی</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+          </button>
+          <div class="submenu-content pt-2 pr-4 hidden">
+            <a href="./categories-list.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">لیست دسته‌بندی‌ها</a>
+            <a href="./categories-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">افزودن دسته‌بندی</a>
+            <a href="./categories-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">ویرایش دسته‌بندی</a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 lg:mr-64">
+      <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="flex items-center justify-between px-4 lg:px-8 py-4">
+          <button id="open-sidebar-btn" class="lg:hidden text-gray-600 hover:text-gray-900">
+            <i data-lucide="menu"></i>
+          </button>
+          <h2 class="text-lg font-semibold text-gray-800">لیست غذاها</h2>
+          <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+            AD
+          </div>
+        </div>
+      </header>
+      <main class="p-4 lg:p-8">
+        <!-- Foods List Content -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <h2 class="text-xl font-bold text-gray-800">لیست غذاها</h2>
+            <a href="./foods-add.html" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all flex items-center gap-2 justify-center shadow-sm">
+              <i data-lucide="plus" class="w-5 h-5"></i>
+              افزودن غذای جدید
+            </a>
+          </div>
+          <div class="relative mb-6">
+            <i data-lucide="search" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+            <input type="text" placeholder="جستجوی غذا..." class="w-full pr-12 pl-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          </div>
+          <!-- Desktop Table -->
+          <div class="hidden md:block overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">تصویر</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">نام غذا</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">دسته‌بندی</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">قیمت</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">موجودی</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">وضعیت</th>
+                  <th class="text-right py-4 px-4 text-sm font-semibold text-gray-700">عملیات</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Sample Row -->
+                <tr class="border-b last:border-b-0 hover:bg-gray-50">
+                  <td class="py-4 px-4"><img src="https://images.pexels.com/photos/1653877/pexels-photo-1653877.jpeg?auto=compress&cs=tinysrgb&w=200" alt="پیتزا پپرونی" class="w-16 h-16 rounded-lg object-cover"></td>
+                  <td class="py-4 px-4 text-sm font-semibold text-gray-800">پیتزا پپرونی</td>
+                  <td class="py-4 px-4 text-sm text-gray-600">پیتزا</td>
+                  <td class="py-4 px-4 text-sm font-semibold text-gray-800">۲۸۵,۰۰۰ تومان</td>
+                  <td class="py-4 px-4"><span class="text-xs font-medium px-3 py-1 rounded-full bg-green-100 text-green-700">موجود</span></td>
+                  <td class="py-4 px-4"><button class="text-xs font-medium px-3 py-1 rounded-full flex items-center gap-1 bg-blue-100 text-blue-700"><i data-lucide="eye" class="w-3.5 h-3.5"></i>فعال</button></td>
+                  <td class="py-4 px-4">
+                    <div class="flex items-center gap-2">
+                      <a href="./foods-edit.html" class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><i data-lucide="edit-2" class="w-4.5 h-4.5"></i></a>
+                      <button class="delete-btn p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><i data-lucide="trash-2" class="w-4.5 h-4.5"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Add more rows as needed -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Mobile Cards -->
+          <div class="md:hidden space-y-4">
+            <!-- Sample Card -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="flex gap-4 mb-3">
+                <img src="https://images.pexels.com/photos/1653877/pexels-photo-1653877.jpeg?auto=compress&cs=tinysrgb&w=200" alt="پیتزا پپرونی" class="w-20 h-20 rounded-lg object-cover">
+                <div class="flex-1">
+                  <h3 class="font-bold text-gray-800 mb-1">پیتزا پپرونی</h3>
+                  <p class="text-sm text-gray-600 mb-1">پیتزا</p>
+                  <p class="text-sm font-bold text-gray-800">۲۸۵,۰۰۰ تومان</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <span class="text-xs font-medium px-3 py-1 rounded-full bg-green-100 text-green-700">موجود</span>
+                  <span class="text-xs font-medium px-3 py-1 rounded-full bg-blue-100 text-blue-700">فعال</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <a href="./foods-edit.html" class="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"><i data-lucide="edit-2" class="w-4.5 h-4.5"></i></a>
+                  <button class="delete-btn p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"><i data-lucide="trash-2" class="w-4.5 h-4.5"></i></button>
+                </div>
+              </div>
+            </div>
+            <!-- Add more cards as needed -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+  <script src="./script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

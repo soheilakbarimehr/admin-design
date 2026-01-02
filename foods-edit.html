@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ویرایش غذا - پنل مدیریت رستوران</title>
+  <link rel="stylesheet" href="./output.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50">
+
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 lg:translate-x-0 translate-x-full">
+      <div class="flex items-center justify-between p-6 border-b">
+        <h1 class="text-xl font-bold text-gray-800">پنل مدیریت رستوران</h1>
+        <button id="close-sidebar-btn" class="lg:hidden text-gray-600 hover:text-gray-900">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <nav class="p-4">
+        <a href="./index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors mb-2 text-gray-700 hover:bg-gray-100">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span class="font-medium">داشبورد</span>
+        </a>
+        <div class="mb-2">
+          <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
+              <span class="font-medium">مدیریت غذاها</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+          </button>
+          <div class="submenu-content pt-2 pr-4 hidden">
+            <a href="./foods-list.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">لیست غذاها</a>
+            <a href="./foods-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">افزودن غذا</a>
+            <a href="./foods-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm bg-blue-500 text-white">ویرایش غذا</a>
+          </div>
+        </div>
+        <div class="mb-2">
+          <button class="submenu-toggle w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-colors text-gray-700 hover:bg-gray-100">
+            <div class="flex items-center gap-3">
+              <i data-lucide="folder-tree" class="w-5 h-5"></i>
+              <span class="font-medium">مدیریت دسته‌بندی</span>
+            </div>
+            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+          </button>
+          <div class="submenu-content pt-2 pr-4 hidden">
+            <a href="./categories-list.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">لیست دسته‌بندی‌ها</a>
+            <a href="./categories-add.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">افزودن دسته‌بندی</a>
+            <a href="./categories-edit.html" class="w-full text-right flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm text-gray-600 hover:bg-gray-100">ویرایش دسته‌بندی</a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 lg:mr-64">
+      <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="flex items-center justify-between px-4 lg:px-8 py-4">
+          <button id="open-sidebar-btn" class="lg:hidden text-gray-600 hover:text-gray-900">
+            <i data-lucide="menu"></i>
+          </button>
+          <h2 class="text-lg font-semibold text-gray-800">ویرایش غذا</h2>
+          <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+            AD
+          </div>
+        </div>
+      </header>
+      <main class="p-4 lg:p-8">
+        <!-- Edit Food Form -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-6">فرم ویرایش غذا</h2>
+          <form class="space-y-6">
+            <!-- Form fields from EditFood.tsx -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="food-name" class="font-medium text-gray-700">نام غذا</label>
+                <input type="text" id="food-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="پیتزا پپرونی">
+              </div>
+              <div class="space-y-2">
+                <label for="food-category" class="font-medium text-gray-700">دسته‌بندی</label>
+                <select id="food-category" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option selected>پیتزا</option>
+                  <option>برگر</option>
+                  <option>پاستا</option>
+                  <option>سالاد</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="food-price" class="font-medium text-gray-700">قیمت (تومان)</label>
+                <input type="text" id="food-price" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="۲۸۵,۰۰۰">
+              </div>
+              <div class="space-y-2">
+                <label for="food-stock" class="font-medium text-gray-700">تعداد موجودی</label>
+                <input type="number" id="food-stock" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="۱۰">
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="font-medium text-gray-700">وضعیت موجودی</label>
+              <div class="flex gap-4">
+                <label class="flex items-center gap-2"><input type="radio" name="stock-status" value="available" class="form-radio text-blue-600" checked><span class="text-gray-700">موجود</span></label>
+                <label class="flex items-center gap-2"><input type="radio" name="stock-status" value="unavailable" class="form-radio text-blue-600"><span class="text-gray-700">ناموجود</span></label>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="font-medium text-gray-700">تصویر غذا</label>
+              <div class="flex items-center gap-4">
+                  <img src="https://images.pexels.com/photos/1653877/pexels-photo-1653877.jpeg?auto=compress&cs=tinysrgb&w=200" alt="تصویر فعلی" class="w-24 h-24 rounded-lg object-cover">
+                  <div class="flex-1">
+                      <div class="flex items-center justify-center w-full">
+                      <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                          <div class="flex flex-col items-center justify-center">
+                          <p class="text-sm text-gray-500"><span class="font-semibold">برای تغییر تصویر کلیک کنید</span></p>
+                          </div>
+                          <input id="dropzone-file" type="file" class="hidden">
+                      </label>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="flex justify-end gap-4 pt-4">
+              <button type="button" class="px-6 py-2.5 rounded-lg font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all">لغو</button>
+              <button type="submit" class="px-6 py-2.5 rounded-lg font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all">ذخیره تغییرات</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+  <script src="./script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
